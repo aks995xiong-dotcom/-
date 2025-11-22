@@ -116,7 +116,7 @@ const App: React.FC = () => {
                   item.id === Category.COMFORT ? 'bg-amber-100 text-amber-600 group-hover:bg-amber-600 group-hover:text-white' :
                   'bg-emerald-100 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white'
                 }`}>
-                  {React.cloneElement(item.icon as React.ReactElement, { size: 32 })}
+                  {React.cloneElement(item.icon as React.ReactElement<any>, { size: 32 })}
                 </div>
                 <h3 className="text-lg font-bold text-slate-800 mb-2">{categoryData.title}</h3>
                 <p className="text-sm text-slate-500 mb-4">{categoryData.description}</p>

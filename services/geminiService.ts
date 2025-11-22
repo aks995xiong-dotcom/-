@@ -1,5 +1,12 @@
 import { GoogleGenAI, Chat } from "@google/genai";
 
+// Add type declaration to satisfy TypeScript build
+declare const process: {
+  env: {
+    API_KEY: string;
+  }
+};
+
 const SYSTEM_INSTRUCTION = `
 你是一位专业的恋爱导师和情感专家，名叫“LoveGuide AI”。
 你的性格：温暖、富有同理心、客观、幽默且实用。
@@ -19,6 +26,7 @@ let client: GoogleGenAI | null = null;
 
 const getClient = () => {
   if (!client) {
+    // @ts-ignore - Env var injected by Vite
     const apiKey = process.env.API_KEY;
     if (!apiKey) {
       console.error("API_KEY is missing from environment variables.");
