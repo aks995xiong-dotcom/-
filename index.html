@@ -3,7 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- SEO & Social Share Meta Tags -->
     <title>LoveGuide - 恋爱助手</title>
+    <meta name="description" content="全方位的恋爱教学平台，提供聊天技巧、约会灵感、情感疏导以及AI智能恋爱顾问。" />
+    
+    <!-- Open Graph / Facebook / WeChat -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://love-guide.app/" />
+    <meta property="og:title" content="LoveGuide - 你的专属恋爱军师" />
+    <meta property="og:description" content="不知道怎么回消息？约会去哪儿？LoveGuide AI 随时为你解答，助你在亲密关系中找到自信与幸福。" />
+    <meta property="og:image" content="https://picsum.photos/seed/loveguide/1200/630" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://love-guide.app/" />
+    <meta property="twitter:title" content="LoveGuide - 你的专属恋爱军师" />
+    <meta property="twitter:description" content="全方位的恋爱教学平台，提供聊天技巧、约会灵感以及AI智能恋爱顾问。" />
+    <meta property="twitter:image" content="https://picsum.photos/seed/loveguide/1200/630" />
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -44,12 +62,15 @@
     "react/": "https://aistudiocdn.com/react@^19.2.0/",
     "react": "https://aistudiocdn.com/react@^19.2.0",
     "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/"
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "vite": "https://aistudiocdn.com/vite@^7.2.4",
+    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.1"
   }
 }
 </script>
 </head>
   <body class="bg-rose-50 text-slate-800">
     <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
   </body>
 </html>

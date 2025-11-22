@@ -17,7 +17,9 @@ import {
   Gift,
   ShieldCheck,
   MessageSquareHeart,
-  CalendarHeart
+  CalendarHeart,
+  Share2,
+  Check
 } from 'lucide-react';
 import { CATEGORIES } from './constants';
 import { Category, CategoryData } from './types';
@@ -43,6 +45,7 @@ const iconMap: Record<string, React.ReactNode> = {
 const App: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<Category | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
 
   // Navigation items
   const navItems = [
@@ -56,6 +59,16 @@ const App: React.FC = () => {
     setActiveCategory(id);
     setMobileMenuOpen(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleShare = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      setIsCopied(true);
+      setTimeout(() => setIsCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy link', err);
+    }
   };
 
   const renderHome = () => (
@@ -230,20 +243,45 @@ const App: React.FC = () => {
                 {item.label}
               </button>
             ))}
+            
+            {/* Separator */}
+            <div className="h-6 w-px bg-slate-200 mx-2"></div>
+
+            {/* Share Button (Desktop) */}
+            <button
+              onClick={handleShare}
+              className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                isCopied 
+                ? 'bg-green-100 text-green-700' 
+                : 'text-slate-600 hover:bg-slate-100'
+              }`}
+              title="分享网页"
+            >
+              {isCopied ? <Check size={18} /> : <Share2 size={18} />}
+              {isCopied ? '已复制' : '分享'}
+            </button>
           </nav>
 
-          {/* Mobile Menu Toggle */}
-          <button 
-            className="md:hidden p-2 text-slate-600"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Mobile Right Side (Share + Menu) */}
+          <div className="md:hidden flex items-center gap-2">
+            <button 
+              className={`p-2 rounded-full ${isCopied ? 'text-green-600 bg-green-50' : 'text-slate-600'}`}
+              onClick={handleShare}
+            >
+              {isCopied ? <Check size={20} /> : <Share2 size={20} />}
+            </button>
+            <button 
+              className="p-2 text-slate-600"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Nav Dropdown */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-white border-t border-slate-100 absolute w-full shadow-lg">
+          <div className="md:hidden bg-white border-t border-slate-100 absolute w-full shadow-lg animate-fadeIn">
             <div className="flex flex-col p-4 space-y-2">
               {navItems.map((item) => (
                 <button
